@@ -1,6 +1,6 @@
-score, NYSE: GM, 2100
-score, NASDAQ: TSLA, 2300
-score, NYSE: UAL, 1700
+score, NYSE: GM, 2100, 20, 2017-04-11T08:42:37.315756
+score, NASDAQ: TSLA, 2300, 60, 2017-04-11T08:42:37.315856
+score, NYSE: UAL, 1700, 60, 2017-04-11T08:42:37.315956
 
 alias, United, NYSE: UAL
 alias, United Airlines, NYSE: UAL

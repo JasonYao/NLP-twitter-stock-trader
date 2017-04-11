@@ -96,5 +96,6 @@ ENV/
 .DS_Store
 
 # Application ignores
-app.history
+.app.history
 .input
+.app.trades

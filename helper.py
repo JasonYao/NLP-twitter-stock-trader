@@ -37,6 +37,18 @@ def parse_args():
         return args
 
 
+def log_state(initial_state, viability_scores, aliases):
+    logging.debug('Viability scores after ' + initial_state + ':')
+    for company, score in viability_scores.items():
+        logging.debug('{0:<30} {1}'.format(company, str(score)))
+    logging.debug('\n')
+
+    logging.debug('Aliases after ' + initial_state + ':')
+    for company, ticker in aliases.items():
+        logging.debug('{0:<30} {1}'.format(company, ticker))
+    logging.debug('\n')
+
+
 """
 Testing helper methods
 """
@@ -50,10 +62,10 @@ def cleanup():
         os.remove(process.TRADE_FILE)
 
 
-def run_processing_engine(file_path):
+def run_processing_engine(input_file):
     """
     Gives back the return code of running the processing engine given a file
     """
     from subprocess import Popen, PIPE
-    p = Popen(["python", "process.py", file_path], stdout=PIPE)
+    p = Popen(["python", "process.py", input_file, "-v"], stdout=PIPE)
     return p.wait()
