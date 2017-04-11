@@ -87,3 +87,14 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+
+# IDE ignores
+.idea/
+
+# OSX ignores
+.DS_Store
+
+# Application ignores
+app.history
+.input
