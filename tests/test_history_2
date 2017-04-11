@@ -1,0 +1,9 @@
+score, NYSE: GM, 2100
+score, NASDAQ: TSLA, 2300
+score, NYSE: UAL, 1700
+
+alias, United, NYSE: UAL
+alias, United Airlines, NYSE: UAL
+alias, AMD, NASDAQ: AMD
+alias, AyyMD, NASDAQ: AMD
+alias, Advanced Micro Devices, NASDAQ: AMD
