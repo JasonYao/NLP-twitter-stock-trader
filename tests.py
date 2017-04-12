@@ -70,10 +70,10 @@ def test_history_read_3():
 
     # Correct values
     actual_scores = {
-        'NYSE: GM': (float(2100), 20, '2017-04-11T08:42:37.315456'),
-        'NASDAQ: TSLA': (float(2300), 60, '2017-04-11T08:42:37.315556'),
-        'NYSE: UAL': (float(1700), 60, '2017-04-11T08:42:37.315656'),
-        'NASDAQ: AMD': (float(1500), 100, '2017-04-11T08:42:37.315756')
+        'NYSE: GM': (float(200), 20, '2017-04-11T08:42:37.315456'),
+        'NASDAQ: TSLA': (float(100), 60, '2017-04-11T08:42:37.315556'),
+        'NYSE: UAL': (float(300), 60, '2017-04-11T08:42:37.315656'),
+        'NASDAQ: AMD': (float(-200), 100, '2017-04-11T08:42:37.315756')
     }
 
     actual_aliases = {
@@ -116,7 +116,11 @@ def test_input_0():
 
 def test_input_1():
     """
-    Test with a valid input file: 1 tweet with 1 company, with history_3
+    Test with a valid input file:
+        - Single tweet
+        - Single company (Tesla)
+        - Positive sentiment
+        - History file: 3
     """
 
     # Setup
@@ -132,7 +136,11 @@ def test_input_1():
 
 def test_input_2():
     """
-    Test with a valid input file: 1 tweet with 2 companies, with history_3
+    Test with a valid input file:
+        - Single tweet
+        - Single company (United Airlines)
+        - Negative sentiment
+        - History file: 3
     """
 
     # Setup
@@ -148,7 +156,12 @@ def test_input_2():
 
 def test_input_3():
     """
-    Test with a valid input file: 2 tweets with 2 companies, with history_3
+    Test with a valid input file:
+        - 2 tweets, single company per tweet
+        - Two companies (Tesla and GM)
+        - Positive sentiment for Tesla
+        - Negative sentiment for GM
+        - History file: 3
     """
 
     # Setup
@@ -164,7 +177,11 @@ def test_input_3():
 
 def test_input_4():
     """
-    Test with a valid input file: 2 tweets with 5 companies, with history_3
+    Test with a valid input file:
+        - Single tweet
+        - 2 companies (AMD and GM)
+        - Negative sentiment
+        - History file: 3
     """
 
     # Setup
@@ -172,6 +189,26 @@ def test_input_4():
     shutil.copyfile(process.TESTING_DIRECTORY + '/test_history_3', process.HISTORY_FILE)
 
     file_path = process.TESTING_DIRECTORY + '/test_input_4'
+    assert (helper.run_processing_engine(file_path) == 0)
+
+    # Teardown
+    helper.cleanup()
+
+
+def test_input_5():
+    """
+    Test with a valid input file:
+        - Single tweet
+        - 2 companies (GM and Tesla)
+        - Positive sentiment
+        - History file: 3
+    """
+
+    # Setup
+    helper.cleanup()
+    shutil.copyfile(process.TESTING_DIRECTORY + '/test_history_3', process.HISTORY_FILE)
+
+    file_path = process.TESTING_DIRECTORY + '/test_input_5'
     assert (helper.run_processing_engine(file_path) == 0)
 
     # Teardown

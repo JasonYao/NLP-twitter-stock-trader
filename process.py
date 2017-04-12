@@ -1,6 +1,8 @@
 # Application imports
 import logging
 import csv
+from textblob import TextBlob
+import math
 
 # Grabs non-application specific helper modules
 import helper
@@ -10,7 +12,6 @@ Back-end processing engine that'll
 process a given batch of tweets
 """
 
-
 # Global files & directories
 LOGGING_DIRECTORY = 'logs'
 TESTING_DIRECTORY = 'tests'
@@ -18,11 +19,11 @@ HISTORY_FILE = '.app.history'
 TRADE_FILE = '.app.trades'
 
 # Global constants
-CALL_THRESHOLD_SOFT = 2200
-CALL_THRESHOLD_HARD = 2400
+CALL_THRESHOLD_SOFT = 100
+CALL_THRESHOLD_HARD = 300
 
-PUT_THRESHOLD_SOFT = 1800
-PUT_THRESHOLD_HARD = 1600
+PUT_THRESHOLD_SOFT = -100
+PUT_THRESHOLD_HARD = -300
 
 
 def read_history():
@@ -67,25 +68,30 @@ def read_history():
     return viability_scores, aliases
 
 
-def extract_companies(message_tokens, aliases):
+def extract_companies(tweet_message, aliases):
     extracted_companies = []
-    for token in message_tokens:
+    # Tokenises the tweet into words
+    tweet_message = helper.strip_punctuation(tweet_message)
+    tokens = tweet_message.split()
+
+    for token in tokens:
         if token in aliases:
-            extracted_companies.append(token)
+            extracted_companies.append(aliases[token])
 
     return extracted_companies
 
 
-def get_log_probability(token):
-    #TODO implement
-    return 5
+def get_tweet_sentiment(tweet):
+    sanitised_tweet = helper.sanitise_tweet(tweet)
+    analysis = TextBlob(sanitised_tweet)
+    return analysis.sentiment.polarity
 
 
 def get_sentiment_analysis(tweet, aliases):
     """
     Given a tweet which is a tuple, where:
         tweet[0] -> Tweet message
-        tweet[1] -> Tweet weight, how important/wide-spread this tweet is
+        tweet[1] -> Number of retweets, basically our measure of how important/wide-spread this tweet is
         tweet[2] -> Tweet timestamp, when the tweet was given
 
     This function will extract any companies
@@ -97,31 +103,29 @@ def get_sentiment_analysis(tweet, aliases):
     """
     new_companies = {}
     message = tweet[0]
-    weight = float(tweet[1])
+    weight = math.log(int(tweet[1]))  # The weight of a given tweet is simply ln(# of retweets)
     timestamp = tweet[2]
 
-    # Tokenises the tweet into words
-    tokens = message.split()
-
-    # TODO actual NLP shit here
     # Extracts any company names
-    extracted_companies = set(extract_companies(tokens, aliases))
+    extracted_companies = set(extract_companies(message, aliases))
+
+    # Debugging information
+    logging.debug('Extracted companies from tweet message: ' + message)
+    for extracted_company in extracted_companies:
+        logging.debug('\t\t' + extracted_company)
 
     # Sanity check in case no company's name could be found in the tweet
     if len(extracted_companies) == 0:
         return new_companies
 
-    log_probability = 0.0
+    # Gets the sentiment of the tweet
+    sentiment_polarity = get_tweet_sentiment(message)
 
-    # For each word token, look up log-probability
-    # in Alex Davies' word list, ignore if it is not found
-    for token in tokens:
-        # Sum all log probabilities for the 'bullish'
-        # or 'bearish' sentiment of the entire tweet
-        log_probability += get_log_probability(token)
-
+    # Assumes that all companies mentioned reflect the
+    # sentiment of the whole tweet (non-real assumption,
+    # but fine for project)
     for company in extracted_companies:
-        new_companies[company] = (log_probability, weight/10, timestamp)
+        new_companies[company] = (sentiment_polarity, weight, timestamp)
 
     return new_companies
 
@@ -140,13 +144,12 @@ def add_new_state(viability_scores, new_companies):
 
         if new_company in viability_scores:
             # There already exists a base score, updates it with the new information
-            new_weight = viability_scores[new_company][1] + new_weight
-            new_score = (viability_scores[new_company][0] + new_score) / new_weight
-            # TODO don't just replace with the next timestamp, find actual latest one by time
-            viability_scores[new_company] = (new_score, new_weight, new_timestamp)
+            total_score = viability_scores[new_company][0] + (new_score * new_weight)
+            total_weight = viability_scores[new_company][1] + new_weight
+            viability_scores[new_company] = (total_score, total_weight, new_timestamp)
         else:
             # There does not exist a base score, in which case one is generated, and the new information added to it
-            viability_scores[new_company] = ((2000.0 + new_score) / 2, 1 + new_weight, new_timestamp)
+            viability_scores[new_company] = (new_score, new_weight, new_timestamp)
     return viability_scores
 
 
@@ -169,6 +172,8 @@ def parse_input(viability_scores, aliases, input_file_name):
                 tweet[-1] = tweet[-1].strip()
 
                 new_companies = get_sentiment_analysis(tweet, aliases)
+                logging.info("Adding new information:\n\n")
+                logging.info(new_companies)
                 viability_scores = add_new_state(viability_scores, new_companies)
             logging.info("Input has now been read successfully")
     except (IOError, ValueError):
@@ -186,20 +191,40 @@ def write_trades(viability_scores):
     """
     with open(TRADE_FILE, "w") as trade_file:
         for company, company_information in viability_scores.items():
-            logging.info(company_information)
-            score = company_information[0]
+            # Company information values
+            score = float(company_information[0])
             weight = company_information[1]
             timestamp = company_information[2]
-            if CALL_THRESHOLD_SOFT <= score <= CALL_THRESHOLD_HARD:
-                trade_file.write('call, ' + company + ', soft')
-            elif score >= CALL_THRESHOLD_HARD:
-                trade_file.write('call, ' + company + ', hard')
-            elif PUT_THRESHOLD_SOFT >= score >= PUT_THRESHOLD_HARD:
-                trade_file.write('put, ' + company + ', soft')
-            elif score <= PUT_THRESHOLD_HARD:
-                trade_file.write('put, ' + company + ', hard')
+
+            # Debugging information
+            logging.info("Writing trade for company:\t" + company)
+            logging.debug("\t\tScore:\t\t" + str(score))
+            logging.debug("\t\tWeight:\t\t" + str(weight))
+            logging.debug("\t\tTimestamp:\t" + timestamp)
+
+            if PUT_THRESHOLD_SOFT <= score <= CALL_THRESHOLD_SOFT:
+                # Not enough sentiment to invoke a trade
+                logging.info("Company:\t" + company + " does not have enough sentiment:\n\t\t**NO TRADE**")
+                logging.info("Not enough of a sentiment score to make a trade")
+            elif PUT_THRESHOLD_HARD <= score <= PUT_THRESHOLD_SOFT:
+                # Enough sentiment to make a soft put trade
+                logging.info("Company:\t" + company + " has enough **NEGATIVE** sentiment:\n\t\t**SOFT PUT**")
+                trade_file.write('put, ' + company + ', soft, ' + timestamp)
+            elif score < PUT_THRESHOLD_HARD:
+                # Enough sentiment to make a hard put trade
+                logging.info("Company:\t" + company + " has enough **NEGATIVE** sentiment to make a\n\t\t**HARD PUT**")
+                trade_file.write('put, ' + company + ', hard, ' + timestamp)
+            elif CALL_THRESHOLD_SOFT <= score <= CALL_THRESHOLD_HARD:
+                # Enough sentiment to make a soft call trade
+                logging.info("Company:\t" + company + " has enough **POSITIVE** sentiment to make a\n\t\t**SOFT CALL**")
+                trade_file.write('call, ' + company + ', soft, ' + timestamp)
+            elif CALL_THRESHOLD_HARD > score:
+                # Enough sentiment to make a hard call trade
+                logging.info("Company:\t" + company + " has enough **POSITIVE** sentiment to make a\n\t\t**HARD CALL**")
+                trade_file.write('call, ' + company + ', hard, ' + timestamp)
             else:
-                logging.warning('Error: trading could not write for: ' + company + ' with a score of: ' + str(score))
+                logging.warning('Error: trading could not write for: '
+                                + company + ' with a score of: ' + str(score) + '\n')
 
 
 def write_history(viability_scores, aliases):
@@ -225,27 +250,29 @@ def main():
     helper.setup_logging(args.verbose)
     logging.info("Logging is now setup")
 
+    logging.info('-------------------- READING HISTORY START --------------------')
     # Gets prior history if available, clean state if not
-    logging.info('-------------------- READING HISTORY END --------------------')
     viability_scores, aliases = read_history()
 
     # Debugging
     helper.log_state('history read-in', viability_scores, aliases)
     logging.info('-------------------- READING HISTORY END --------------------')
 
-    # Gets the current ingestion batch from an input file
     logging.info('-------------------- INPUT FILE START --------------------')
+    # Gets the current ingestion batch from an input file
     viability_scores, aliases = parse_input(viability_scores, aliases, file_name)
 
     # Debugging
     helper.log_state('input file read-in', viability_scores, aliases)
     logging.info('-------------------- INPUT FILE END --------------------')
 
+    logging.info('-------------------- WRITING FILE OUTPUT START --------------------')
     # Writes any trades to disk
     write_trades(viability_scores)
 
     # Writes the SA state to history
     write_history(viability_scores, aliases)
+    logging.info('-------------------- WRITING FILE OUTPUT END --------------------')
 
 
 if __name__ == '__main__':

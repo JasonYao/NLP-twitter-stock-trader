@@ -8,6 +8,20 @@ This application will implement paper trading of stocks
 based on a Natural Language Processing (NLP) algorithm
 for sentiment analysis.
 
+It should be noted that using twitter reactions to a
+company is extremely volatile, and has very little
+usecase outside of intraday trading, due to having
+no additional context of a company.
+
+This software is provided as-is, and the authors are
+not liable for anything resulting from you using this
+program.
+ 
+They are especially not liable for damages resulting
+from your own stupidity in using this program to try
+and make money, instead of doing your own due diligence
+on a company's financial records.
+
 ## Overview
 The application has three main parts:
 
@@ -33,17 +47,17 @@ historical data, then computes and labels each given stock with
 a `Viability Score` (`VS`). This score is calculated from the given
 current sentiment about a stock, and its current position in the
 marketplace, with a higher differential resulting in a higher
-`VS`. Output will be saved in the [output/sentiment](output/sentiment/)
-directory.
+`VS`.
 
 ### (Paper) Trading engine
 The Trading engine will take a given list of the highest `VS`
 and proceed to [paper trade](https://en.wikipedia.org/wiki/Stock_market_simulator)
-based off of the sentiment analysis. Output will be saved in
-the [output/trading](output/trading/) directory.
+based off of the sentiment analysis.
 
 ### Runtime
-TODO
+Sentiment analysis via the [textblob](https://textblob.readthedocs.io/en/dev/) library
+is the largest concern when it comes to runtime. Each tweet parsing for sentiment analysis
+takes ~0.5s.
 
 ## Running Commands
 ### To start the ingestion engine:
@@ -91,10 +105,10 @@ python trade.py -h
 ## Dependencies
 ### Application Dependencies
 - [Python 3](https://docs.python.org/3/) (developed & tested on 3.6.1)
-- TODO
+- [Textblob](https://textblob.readthedocs.io/en/dev/) (NLP sentiment analysis)
 
-### Dev Dependencies (required to run tests)
-- [pytest](http://doc.pytest.org/en/latest/)
+### Dev Dependencies
+- [pytest](http://doc.pytest.org/en/latest/) (required to run tests)
 
 ## Installation
 ### OSX

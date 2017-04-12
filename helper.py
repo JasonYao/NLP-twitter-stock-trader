@@ -3,6 +3,8 @@ import datetime
 import process
 import argparse
 import os
+import re
+import string
 
 """
 Application helper methods
@@ -47,6 +49,23 @@ def log_state(initial_state, viability_scores, aliases):
     for company, ticker in aliases.items():
         logging.debug('{0:<30} {1}'.format(company, ticker))
     logging.debug('\n')
+
+
+def sanitise_tweet(some_string):
+    """
+    Removes links and special characters
+    from a given string
+    """
+    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])| (\w +: /  / \S +)", " ", some_string).split())
+
+
+def strip_punctuation(some_string):
+    """
+    Removes punctuation from a given string
+    """
+    some_string = some_string.replace("'", " '")
+    translator = str.maketrans('', '', string.punctuation)
+    return some_string.translate(translator)
 
 
 """
