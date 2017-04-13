@@ -19,11 +19,11 @@ HISTORY_FILE = '.app.history'
 TRADE_FILE = '.app.trades'
 
 # Global constants
-CALL_THRESHOLD_SOFT = 100
-CALL_THRESHOLD_HARD = 300
+CALL_THRESHOLD_SOFT = 50
+CALL_THRESHOLD_HARD = 150
 
-PUT_THRESHOLD_SOFT = -100
-PUT_THRESHOLD_HARD = -300
+PUT_THRESHOLD_SOFT = -50
+PUT_THRESHOLD_HARD = -150
 
 
 def read_history():
@@ -149,7 +149,7 @@ def add_new_state(viability_scores, new_companies):
             viability_scores[new_company] = (total_score, total_weight, new_timestamp)
         else:
             # There does not exist a base score, in which case one is generated, and the new information added to it
-            viability_scores[new_company] = (new_score, new_weight, new_timestamp)
+            viability_scores[new_company] = (new_score * new_weight, new_weight, new_timestamp)
     return viability_scores
 
 

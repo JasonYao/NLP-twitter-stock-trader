@@ -1,0 +1,512 @@
+alias, 3M Company, MMM
+alias, Abbott Laboratories, ABT
+alias, AbbVie, ABBV
+alias, Accenture plc, ACN
+alias, Activision Blizzard, ATVI
+alias, Acuity Brands Inc, AYI
+alias, Adobe Systems Inc, ADBE
+alias, Advance Auto Parts, AAP
+alias, AES Corp, AES
+alias, Aetna Inc, AET
+alias, Affiliated Managers Group Inc, AMG
+alias, AFLAC Inc, AFL
+alias, Agilent Technologies Inc, A
+alias, Air Products & Chemicals Inc, APD
+alias, Akamai Technologies Inc, AKAM
+alias, Alaska Air Group Inc, ALK
+alias, Albemarle Corp, ALB
+alias, Alexion Pharmaceuticals, ALXN
+alias, Allegion, ALLE
+alias, Allergan, AGN
+alias, Alliance Data Systems, ADS
+alias, Alliant Energy Corp, LNT
+alias, Allstate Corp, ALL
+alias, Alphabet Inc Class A, GOOGL
+alias, Alphabet Inc Class C, GOOG
+alias, Altria Group Inc, MO
+alias, Amazon.com Inc, AMZN
+alias, Ameren Corp, AEE
+alias, American Airlines Group, AAL
+alias, American Electric Power, AEP
+alias, American Express Co, AXP
+alias, American International Group, AIG
+alias, American Tower Corp A, AMT
+alias, American Water Works Company Inc, AWK
+alias, Ameriprise Financial, AMP
+alias, AmerisourceBergen Corp, ABC
+alias, AMETEK Inc, AME
+alias, Amgen Inc, AMGN
+alias, Amphenol Corp, APH
+alias, Anadarko Petroleum Corp, APC
+alias, Analog Devices, ADI
+alias, Anthem Inc., ANTM
+alias, Aon plc, AON
+alias, Apache Corporation, APA
+alias, Apartment Investment & Mgmt, AIV
+alias, Apple Inc., AAPL
+alias, Applied Materials Inc, AMAT
+alias, Archer-Daniels-Midland Co, ADM
+alias, Arconic Inc, ARNC
+alias, Arthur J. Gallagher & Co., AJG
+alias, Assurant Inc, AIZ
+alias, AT&T Inc, T
+alias, Autodesk Inc, ADSK
+alias, Automatic Data Processing, ADP
+alias, AutoNation Inc, AN
+alias, AutoZone Inc, AZO
+alias, AvalonBay Communities, AVB
+alias, Avery Dennison Corp, AVY
+alias, Baker Hughes Inc, BHI
+alias, Ball Corp, BLL
+alias, Bank of America Corp, BAC
+alias, Bard (C.R.) Inc., BCR
+alias, Baxter International Inc., BAX
+alias, BB&T Corporation, BBT
+alias, Becton Dickinson, BDX
+alias, Bed Bath & Beyond, BBBY
+alias, Berkshire Hathaway, BRK.B
+alias, Best Buy Co. Inc., BBY
+alias, BIOGEN IDEC Inc., BIIB
+alias, BlackRock, BLK
+alias, Block H&R, HRB
+alias, Boeing Company, BA
+alias, BorgWarner, BWA
+alias, Boston Properties, BXP
+alias, Boston Scientific, BSX
+alias, Bristol-Myers Squibb, BMY
+alias, Broadcom, AVGO
+alias, Brown-Forman Corp., BF.B
+alias, C. H. Robinson Worldwide, CHRW
+alias, CA, CA
+alias, Cabot Oil & Gas, COG
+alias, Campbell Soup, CPB
+alias, Capital One Financial, COF
+alias, Cardinal Health Inc., CAH
+alias, Carmax Inc, KMX
+alias, Carnival Corp., CCL
+alias, Caterpillar Inc., CAT
+alias, CBOE Holdings, CBOE
+alias, CBRE Group, CBG
+alias, CBS Corp., CBS
+alias, Celgene Corp., CELG
+alias, Centene Corporation, CNC
+alias, CenterPoint Energy, CNP
+alias, CenturyLink Inc, CTL
+alias, Cerner, CERN
+alias, CF Industries Holdings Inc, CF
+alias, Charles Schwab Corporation, SCHW
+alias, Charter Communications, CHTR
+alias, Chesapeake Energy, CHK
+alias, Chevron Corp., CVX
+alias, Chipotle Mexican Grill, CMG
+alias, Chubb Limited, CB
+alias, Church & Dwight, CHD
+alias, CIGNA Corp., CI
+alias, Cimarex Energy, XEC
+alias, Cincinnati Financial, CINF
+alias, Cintas Corporation, CTAS
+alias, Cisco Systems, CSCO
+alias, Citigroup Inc., C
+alias, Citizens Financial Group, CFG
+alias, Citrix Systems, CTXS
+alias, CME Group Inc., CME
+alias, CMS Energy, CMS
+alias, Coach Inc., COH
+alias, Coca Cola Company, KO
+alias, Cognizant Technology Solutions, CTSH
+alias, Colgate-Palmolive, CL
+alias, Comcast Corp., CMCSA
+alias, Comerica Inc., CMA
+alias, ConAgra Foods Inc., CAG
+alias, Concho Resources, CXO
+alias, ConocoPhillips, COP
+alias, Consolidated Edison, ED
+alias, Constellation Brands, STZ
+alias, Corning Inc., GLW
+alias, Costco Co., COST
+alias, Coty, COTY
+alias, Crown Castle International Corp., CCI
+alias, CSRA Inc., CSRA
+alias, CSX Corp., CSX
+alias, Cummins Inc., CMI
+alias, CVS Health, CVS
+alias, D. R. Horton, DHI
+alias, Danaher Corp., DHR
+alias, Darden Restaurants, DRI
+alias, DaVita Inc., DVA
+alias, Deere & Co., DE
+alias, Delphi Automotive, DLPH
+alias, Delta Air Lines, DAL
+alias, Dentsply Sirona, XRAY
+alias, Devon Energy Corp., DVN
+alias, Digital Realty Trust, DLR
+alias, Discover Financial Services, DFS
+alias, Discovery Communications-A, DISCA
+alias, Discovery Communications-C, DISCK
+alias, Dollar General, DG
+alias, Dollar Tree, DLTR
+alias, Dominion Resources, D
+alias, Dover Corp., DOV
+alias, Dow Chemical, DOW
+alias, Dr Pepper Snapple Group, DPS
+alias, DTE Energy Co., DTE
+alias, Du Pont (E.I.), DD
+alias, Duke Energy, DUK
+alias, Dun & Bradstreet, DNB
+alias, E*Trade, ETFC
+alias, Eastman Chemical, EMN
+alias, Eaton Corporation, ETN
+alias, eBay Inc., EBAY
+alias, Ecolab Inc., ECL
+alias, Edison Int'l, EIX
+alias, Edwards Lifesciences, EW
+alias, Electronic Arts, EA
+alias, Emerson Electric Company, EMR
+alias, Entergy Corp., ETR
+alias, Envision Healthcare, EVHC
+alias, EOG Resources, EOG
+alias, EQT Corporation, EQT
+alias, Equifax Inc., EFX
+alias, Equinix, EQIX
+alias, Equity Residential, EQR
+alias, Essex Property Trust, ESS
+alias, Estee Lauder Cos., EL
+alias, Eversource Energy, ES
+alias, Exelon Corp., EXC
+alias, Expedia Inc., EXPE
+alias, Expeditors Int'l, EXPD
+alias, Express Scripts, ESRX
+alias, Extra Space Storage, EXR
+alias, Exxon Mobil Corp., XOM
+alias, F5 Networks, FFIV
+alias, Facebook, FB
+alias, Fastenal Co, FAST
+alias, Federal Realty Investment Trust, FRT
+alias, FedEx Corporation, FDX
+alias, Fidelity National Information Services, FIS
+alias, Fifth Third Bancorp, FITB
+alias, First Solar Inc, FSLR
+alias, FirstEnergy Corp, FE
+alias, Fiserv Inc, FISV
+alias, FLIR Systems, FLIR
+alias, Flowserve Corporation, FLS
+alias, Fluor Corp., FLR
+alias, FMC Corporation, FMC
+alias, FMC Technologies Inc., FTI
+alias, Foot Locker Inc, FL
+alias, Ford Motor, F
+alias, Fortive Corp, FTV
+alias, Fortune Brands Home & Security, FBHS
+alias, Franklin Resources, BEN
+alias, Freeport-McMoRan Inc., FCX
+alias, Frontier Communications, FTR
+alias, Gap (The), GPS
+alias, Garmin Ltd., GRMN
+alias, General Dynamics, GD
+alias, General Electric, GE
+alias, General Growth Properties Inc., GGP
+alias, General Mills, GIS
+alias, General Motors, GM
+alias, Genuine Parts, GPC
+alias, Gilead Sciences, GILD
+alias, Global Payments Inc, GPN
+alias, Goldman Sachs Group, GS
+alias, Goodyear Tire & Rubber, GT
+alias, Grainger (W.W.) Inc., GWW
+alias, Halliburton Co., HAL
+alias, Hanesbrands Inc, HBI
+alias, Harley-Davidson, HOG
+alias, Harman Int'l Industries, HAR
+alias, Harris Corporation, HRS
+alias, Hartford Financial Svc.Gp., HIG
+alias, Hasbro Inc., HAS
+alias, HCA Holdings, HCA
+alias, HCP Inc., HCP
+alias, Helmerich & Payne, HP
+alias, Henry Schein, HSIC
+alias, Hess Corporation, HES
+alias, Hewlett Packard Enterprise, HPE
+alias, Hologic, HOLX
+alias, Home Depot, HD
+alias, Honeywell Int'l Inc., HON
+alias, Hormel Foods Corp., HRL
+alias, Host Hotels & Resorts, HST
+alias, HP Inc., HPQ
+alias, Humana Inc., HUM
+alias, Huntington Bancshares, HBAN
+alias, IDEXX Laboratories, IDXX
+alias, Illinois Tool Works, ITW
+alias, Illumina Inc, ILMN
+alias, Incyte, INCY
+alias, Ingersoll-Rand PLC, IR
+alias, Intel Corp., INTC
+alias, Intercontinental Exchange, ICE
+alias, International Business Machines, IBM
+alias, International Paper, IP
+alias, Interpublic Group, IPG
+alias, Intl Flavors & Fragrances, IFF
+alias, Intuit Inc., INTU
+alias, Intuitive Surgical Inc., ISRG
+alias, Invesco Ltd., IVZ
+alias, Iron Mountain Incorporated, IRM
+alias, J. B. Hunt Transport Services, JBHT
+alias, Jacobs Engineering Group, JEC
+alias, JM Smucker, SJM
+alias, Johnson & Johnson, JNJ
+alias, Johnson Controls International, JCI
+alias, JPMorgan Chase & Co., JPM
+alias, Juniper Networks, JNPR
+alias, Kansas City Southern, KSU
+alias, Kellogg Co., K
+alias, KeyCorp, KEY
+alias, Kimberly-Clark, KMB
+alias, Kimco Realty, KIM
+alias, Kinder Morgan, KMI
+alias, KLA-Tencor Corp., KLAC
+alias, Kohl's Corp., KSS
+alias, Kraft Heinz Co, KHC
+alias, Kroger Co., KR
+alias, L Brands Inc., LB
+alias, L-3 Communications Holdings, LLL
+alias, Laboratory Corp. of America Holding, LH
+alias, Lam Research, LRCX
+alias, Leggett & Platt, LEG
+alias, Lennar Corp., LEN
+alias, Leucadia National Corp., LUK
+alias, Level 3 Communications, LVLT
+alias, Lilly (Eli) & Co., LLY
+alias, Lincoln National, LNC
+alias, Linear Technology Corp., LLTC
+alias, LKQ Corporation, LKQ
+alias, Lockheed Martin Corp., LMT
+alias, Loews Corp., L
+alias, Lowe's Cos., LOW
+alias, LyondellBasell, LYB
+alias, M&T Bank Corp., MTB
+alias, Macerich, MAC
+alias, Macy's Inc., M
+alias, Mallinckrodt Plc, MNK
+alias, Marathon Oil Corp., MRO
+alias, Marathon Petroleum, MPC
+alias, Marriott Int'l., MAR
+alias, Marsh & McLennan, MMC
+alias, Martin Marietta Materials, MLM
+alias, Masco Corp., MAS
+alias, Mastercard Inc., MA
+alias, Mattel Inc., MAT
+alias, McCormick & Co., MKC
+alias, McDonald's Corp., MCD
+alias, McKesson Corp., MCK
+alias, Mead Johnson, MJN
+alias, Medtronic plc, MDT
+alias, Merck & Co., MRK
+alias, MetLife Inc., MET
+alias, Mettler Toledo, MTD
+alias, Michael Kors Holdings, KORS
+alias, Microchip Technology, MCHP
+alias, Micron Technology, MU
+alias, Microsoft Corp., MSFT
+alias, Mid-America Apartments, MAA
+alias, Mohawk Industries, MHK
+alias, Molson Coors Brewing Company, TAP
+alias, Mondelez International, MDLZ
+alias, Monsanto Co., MON
+alias, Monster Beverage, MNST
+alias, Moody's Corp, MCO
+alias, Morgan Stanley, MS
+alias, Motorola Solutions Inc., MSI
+alias, Murphy Oil, MUR
+alias, Mylan N.V., MYL
+alias, NASDAQ OMX Group, NDAQ
+alias, National Oilwell Varco Inc., NOV
+alias, Navient, NAVI
+alias, NetApp, NTAP
+alias, Netflix Inc., NFLX
+alias, Newell Brands, NWL
+alias, Newfield Exploration Co, NFX
+alias, Newmont Mining Corp. (Hldg. Co.), NEM
+alias, News Corp. Class A, NWSA
+alias, News Corp. Class B, NWS
+alias, NextEra Energy, NEE
+alias, Nielsen Holdings, NLSN
+alias, Nike, NKE
+alias, NiSource Inc., NI
+alias, Noble Energy Inc, NBL
+alias, Nordstrom, JWN
+alias, Norfolk Southern Corp., NSC
+alias, Northern Trust Corp., NTRS
+alias, Northrop Grumman Corp., NOC
+alias, NRG Energy, NRG
+alias, Nucor Corp., NUE
+alias, Nvidia Corporation, NVDA
+alias, O'Reilly Automotive, ORLY
+alias, Occidental Petroleum, OXY
+alias, Omnicom Group, OMC
+alias, ONEOK, OKE
+alias, Oracle Corp., ORCL
+alias, PACCAR Inc., PCAR
+alias, Parker-Hannifin, PH
+alias, Patterson Companies, PDCO
+alias, Paychex Inc., PAYX
+alias, PayPal, PYPL
+alias, Pentair Ltd., PNR
+alias, People's United Financial, PBCT
+alias, PepsiCo Inc., PEP
+alias, PerkinElmer, PKI
+alias, Perrigo, PRGO
+alias, Pfizer Inc., PFE
+alias, PG&E Corp., PCG
+alias, Philip Morris International, PM
+alias, Phillips 66, PSX
+alias, Pinnacle West Capital, PNW
+alias, Pioneer Natural Resources, PXD
+alias, PNC Financial Services, PNC
+alias, Polo Ralph Lauren Corp., RL
+alias, PPG Industries, PPG
+alias, PPL Corp., PPL
+alias, Praxair Inc., PX
+alias, Priceline.com Inc, PCLN
+alias, Principal Financial Group, PFG
+alias, Procter & Gamble, PG
+alias, Progressive Corp., PGR
+alias, Prologis, PLD
+alias, Prudential Financial, PRU
+alias, Public Serv. Enterprise Inc., PEG
+alias, Public Storage, PSA
+alias, Pulte Homes Inc., PHM
+alias, PVH Corp., PVH
+alias, Qorvo, QRVO
+alias, QUALCOMM Inc., QCOM
+alias, Quanta Services Inc., PWR
+alias, Quest Diagnostics, DGX
+alias, Range Resources Corp., RRC
+alias, Raytheon Co., RTN
+alias, Realty Income Corporation, O
+alias, Red Hat Inc., RHT
+alias, Regency Centers Corporation, REG
+alias, Regeneron, REGN
+alias, Regions Financial Corp., RF
+alias, Republic Services Inc, RSG
+alias, Reynolds American Inc., RAI
+alias, Robert Half International, RHI
+alias, Rockwell Automation Inc., ROK
+alias, Rockwell Collins, COL
+alias, Roper Industries, ROP
+alias, Ross Stores, ROST
+alias, Royal Caribbean Cruises Ltd, RCL
+alias, Ryder System, R
+alias, S&P Global, SPGI
+alias, Salesforce.com, CRM
+alias, SCANA Corp, SCG
+alias, Schlumberger Ltd., SLB
+alias, Scripps Networks Interactive Inc., SNI
+alias, Seagate Technology, STX
+alias, Sealed Air, SEE
+alias, Sempra Energy, SRE
+alias, Sherwin-Williams, SHW
+alias, Signet Jewelers, SIG
+alias, Simon Property Group Inc, SPG
+alias, Skyworks Solutions, SWKS
+alias, SL Green Realty, SLG
+alias, Snap-On Inc., SNA
+alias, Southern Co., SO
+alias, Southwest Airlines, LUV
+alias, Southwestern Energy, SWN
+alias, Stanley Black & Decker, SWK
+alias, Staples Inc., SPLS
+alias, Starbucks Corp., SBUX
+alias, State Street Corp., STT
+alias, Stericycle Inc, SRCL
+alias, Stryker Corp., SYK
+alias, SunTrust Banks, STI
+alias, Symantec Corp., SYMC
+alias, Synchrony Financial, SYF
+alias, Sysco Corp., SYY
+alias, T. Rowe Price Group, TROW
+alias, Target Corp., TGT
+alias, TE Connectivity Ltd., TEL
+alias, Tegna, TGNA
+alias, Teradata Corp., TDC
+alias, Tesoro Petroleum Co., TSO
+alias, Texas Instruments, TXN
+alias, Textron Inc., TXT
+alias, The Bank of New York Mellon Corp., BK
+alias, The Clorox Company, CLX
+alias, The Cooper Companies, COO
+alias, The Hershey Company, HSY
+alias, The Mosaic Company, MOS
+alias, The Travelers Companies Inc., TRV
+alias, The Walt Disney Company, DIS
+alias, Thermo Fisher Scientific, TMO
+alias, Tiffany & Co., TIF
+alias, Time Warner Inc., TWX
+alias, TJX Companies Inc., TJX
+alias, Torchmark Corp., TMK
+alias, Total System Services, TSS
+alias, Tractor Supply Company, TSCO
+alias, TransDigm Group, TDG
+alias, Transocean, RIG
+alias, TripAdvisor, TRIP
+alias, Twenty-First Century Fox Class A, FOXA
+alias, Twenty-First Century Fox Class B, FOX
+alias, Tyson Foods, TSN
+alias, U.S. Bancorp, USB
+alias, UDR Inc, UDR
+alias, Ulta Salon Cosmetics & Fragrance Inc, ULTA
+alias, Under Armour, UA
+alias, Under Armour, UAA
+alias, Union Pacific, UNP
+alias, United Continental Holdings, UAL
+alias, United Health Group Inc., UNH
+alias, United Parcel Service, UPS
+alias, United Rentals, URI
+alias, United Technologies, UTX
+alias, Universal Health Services, UHS
+alias, Unum Group, UNM
+alias, Urban Outfitters, URBN
+alias, V.F. Corp., VFC
+alias, Valero Energy, VLO
+alias, Varian Medical Systems, VAR
+alias, Ventas Inc, VTR
+alias, Verisign Inc., VRSN
+alias, Verisk Analytics, VRSK
+alias, Verizon Communications, VZ
+alias, Vertex Pharmaceuticals Inc, VRTX
+alias, Viacom Inc., VIAB
+alias, Visa Inc., V
+alias, Vornado Realty Trust, VNO
+alias, Vulcan Materials, VMC
+alias, Wal-Mart Stores, WMT
+alias, Walgreens Boots Alliance, WBA
+alias, Waste Management Inc., WM
+alias, Waters Corporation, WAT
+alias, Wec Energy Group Inc, WEC
+alias, Wells Fargo, WFC
+alias, Welltower Inc., HCN
+alias, Western Digital, WDC
+alias, Western Union Co, WU
+alias, WestRock Company, WRK
+alias, Weyerhaeuser Corp., WY
+alias, Whirlpool Corp., WHR
+alias, Whole Foods Market, WFM
+alias, Williams Cos., WMB
+alias, Willis Towers Watson, WLTW
+alias, Wyndham Worldwide, WYN
+alias, Wynn Resorts Ltd, WYNN
+alias, Xcel Energy Inc, XEL
+alias, Xerox Corp., XRX
+alias, Xilinx Inc, XLNX
+alias, XL Capital, XL
+alias, Xylem Inc., XYL
+alias, Yahoo Inc., YHOO
+alias, Yum! Brands Inc, YUM
+alias, Zimmer Biomet Holdings, ZBH
+alias, Zions Bancorp, ZION
+alias, Zoetis, ZTS
+alias, Advanced Micro Devices, AMD
+alias, AMD, AMD
+alias, Tesla Inc, TSLA
+alias, Tesla, TSLA
+alias, United Continental Holdings Inc, UAL
+alias, United, UAL
+alias, United Airlines, UAL

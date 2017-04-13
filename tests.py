@@ -120,12 +120,12 @@ def test_input_1():
         - Single tweet
         - Single company (Tesla)
         - Positive sentiment
-        - History file: 3
+        - History file: base
     """
 
     # Setup
     helper.cleanup()
-    shutil.copyfile(process.TESTING_DIRECTORY + '/test_history_3', process.HISTORY_FILE)
+    shutil.copyfile(process.TESTING_DIRECTORY + '/base_aliases', process.HISTORY_FILE)
 
     file_path = process.TESTING_DIRECTORY + '/test_input_1'
     assert (helper.run_processing_engine(file_path) == 0)
@@ -140,12 +140,12 @@ def test_input_2():
         - Single tweet
         - Single company (United Airlines)
         - Negative sentiment
-        - History file: 3
+        - History file: base
     """
 
     # Setup
     helper.cleanup()
-    shutil.copyfile(process.TESTING_DIRECTORY + '/test_history_3', process.HISTORY_FILE)
+    shutil.copyfile(process.TESTING_DIRECTORY + '/base_aliases', process.HISTORY_FILE)
 
     file_path = process.TESTING_DIRECTORY + '/test_input_2'
     assert (helper.run_processing_engine(file_path) == 0)
@@ -166,7 +166,7 @@ def test_input_3():
 
     # Setup
     helper.cleanup()
-    shutil.copyfile(process.TESTING_DIRECTORY + '/test_history_3', process.HISTORY_FILE)
+    shutil.copyfile(process.TESTING_DIRECTORY + '/base_aliases', process.HISTORY_FILE)
 
     file_path = process.TESTING_DIRECTORY + '/test_input_3'
     assert (helper.run_processing_engine(file_path) == 0)
@@ -181,7 +181,7 @@ def test_input_4():
         - Single tweet
         - 2 companies (AMD and GM)
         - Negative sentiment
-        - History file: 3
+        - History file: base
     """
 
     # Setup
@@ -201,12 +201,12 @@ def test_input_5():
         - Single tweet
         - 2 companies (GM and Tesla)
         - Positive sentiment
-        - History file: 3
+        - History file: base
     """
 
     # Setup
     helper.cleanup()
-    shutil.copyfile(process.TESTING_DIRECTORY + '/test_history_3', process.HISTORY_FILE)
+    shutil.copyfile(process.TESTING_DIRECTORY + '/base_aliases', process.HISTORY_FILE)
 
     file_path = process.TESTING_DIRECTORY + '/test_input_5'
     assert (helper.run_processing_engine(file_path) == 0)
