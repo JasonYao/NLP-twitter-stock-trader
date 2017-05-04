@@ -24,24 +24,44 @@ the backend processing is working
 INPUT_FILE = '.input'
 POLLING_TIMEOUT = 10
 USERS = [
-    "1364930179", # Warren Buffet
-    "25073877", # Donald Trump
-]
+    "1364930179",   # Warren Buffett
+    "25073877",     # Donald Trump
+    "133056605",    # Ultimate Stock Alerts
+    "14886375",     # StockTwits
+    "624413",       # MarketWatch
+    "2837841",      # CNNMoneyInvest
+    "16228398",     # Mark Cuban
+    "50393960",     # Bill Gates
+    "21323268",     # NYSE
+    "184020744",    # Mike Flache
+    "19546277",     # YahooFinance
+    "778670441405775872", # MarketsInsider
+    ]
+
+KEYWORDS = [
+        "NYSE",
+        "IPO",
+        "NASDAQ",
+        ]
 
 class SListener(StreamListener):
 
-    def on_data(self, data):
-        print (data)
-        print('inside of in_data')
-        return True
+    # def on_data(self, data):
+    #     # print (data)
+    #     print('inside of on_data')
+    #
+    #     return True
 
     def on_status(self, status):
-        print('inside of on_status')
-        print(status.text)
+        if not status.retweeted and ('RT @' not in status.text):
+            print(status.favorite_count)
+            print(status.retweet_count)
+            print(status.user.screen_name)
+            print(status.text)
 
     def on_error(self, status_code):
         if status_code == 420:
-            # returning False in on_data disconnects the stream
+            # Disconnect the stream
             return False
 
 
@@ -68,22 +88,17 @@ def main():
     next_tweet_batch = []
 
     print('Gathering tweets from twitter\n')
-    # TODO make a call to twitter's streaming or RESTful API to gather tweets
-    auth = OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
-    print("authenicated")
-    auth.set_access_token(secrets.access_token, secrets.access_token_secret)
-    print("2")
-    twitter_stream = tweepy.Stream(auth, SListener())
-    print("3")
 
+    # Make call to twitter's streaming API to gather tweets
     try:
-        print("here")
-        twitter_stream.filter(track=["twitter"])
+        auth = OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
+        auth.set_access_token(secrets.access_token, secrets.access_token_secret)
+        twitter_stream = tweepy.Stream(auth, SListener())
+        twitter_stream.filter(follow=USERS)
+        # FILTER OUT RETWEETS
     except:
-        print "error!"
+        print ("Authentication error")
         twitter_stream.disconnect()
-
-    print("filtered")
 
     # while True:
     #     print('Gathering tweets from twitter\n')
