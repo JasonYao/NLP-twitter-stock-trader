@@ -2,7 +2,7 @@ import logging
 from subprocess import Popen, PIPE
 import signal
 import os
-import time
+import sys
 
 import re
 import tweepy
@@ -12,9 +12,7 @@ from tweepy import Stream
 
 import secrets
 
-import time
 from datetime import datetime
-
 
 # Grabs non-application specific helper modules
 import helper
@@ -145,9 +143,15 @@ def main():
                     twitter_stream.filter(follow=USERS)
                 except ValueError:
                     print("Checking if backend if free for the next batch")
+                except KeyboardInterrupt:
+                    print("\nCleaning up and exiting the ingestion engine")
+                    if os.path.isfile(INPUT_FILE):
+                        os.remove(INPUT_FILE)
+                    sys.exit(0)
                 except:
                     print("Authentication error")
                     twitter_stream.disconnect()
+
 
             # At this point, the last batch is complete
             print("The last batch is now complete, processing next batch.")
@@ -156,7 +160,7 @@ def main():
             print("\nCleaning up and exiting the ingestion engine")
             if os.path.isfile(INPUT_FILE):
                 os.remove(INPUT_FILE)
-            break
+            sys.exit(0)
 
 
 if __name__ == '__main__':
