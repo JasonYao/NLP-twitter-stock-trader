@@ -12,6 +12,10 @@ from tweepy import Stream
 
 import secrets
 
+import time
+from datetime import datetime
+
+
 # Grabs non-application specific helper modules
 import helper
 
@@ -42,22 +46,42 @@ KEYWORDS = [
         "NYSE",
         "IPO",
         "NASDAQ",
-        ]
+]
+
+NEXT_TWEET_BATCH = []
+
+
+class Tweet:
+    def __init__(self, text, retweets, favorites, time):
+        self.tweet_text = text
+        self.retweet_count = retweets
+        self.favorite_count = favorites
+        self.timestamp = time
+
+    def __str__(self):
+        # tweet text|retweets+fav|timestamp
+        return self.tweet_text + "|" + str(self.retweet_count + self.favorite_count) + "|" \
+               + str(datetime.strptime(str(self.timestamp), '%Y-%m-%d %H:%M:%S'))
+
 
 class SListener(StreamListener):
 
-    # def on_data(self, data):
-    #     # print (data)
-    #     print('inside of on_data')
-    #
-    #     return True
-
     def on_status(self, status):
-        if not status.retweeted and ('RT @' not in status.text):
+        if (len(NEXT_TWEET_BATCH) < 100):
+            # if status.user.id_str in USERS:
+            # if not status.retweeted and ('RT @' not in status.text):
             print(status.favorite_count)
             print(status.retweet_count)
             print(status.user.screen_name)
             print(status.text)
+            print(status.created_at)
+            print(len(NEXT_TWEET_BATCH))
+            new_tweet = Tweet(status.text.strip('\n'), status.retweet_count, status.favorite_count, status.created_at)
+            NEXT_TWEET_BATCH.append(new_tweet)
+            return True
+        else:
+            return False
+
 
     def on_error(self, status_code):
         if status_code == 420:
@@ -65,12 +89,14 @@ class SListener(StreamListener):
             return False
 
 
-def generate_input_file(tweets):
+def generate_input_file():
+    global NEXT_TWEET_BATCH
     logging.info("Writing tweets to input file")
     with open(INPUT_FILE, "w") as input_file:
-        for tweet in tweets:
-            input_file.write(tweet)
+        for tweet in NEXT_TWEET_BATCH:
+            input_file.write(str(tweet) + "\n")
     logging.info("Input file successfully generated")
+    NEXT_TWEET_BATCH = []
 
 
 def handler(signum, frame):
@@ -84,70 +110,51 @@ def main():
     helper.setup_logging(args.verbose)
     logging.info("Polling is set to: " + str(int(POLLING_TIMEOUT)) + " seconds")
 
-    # Batches input while waiting for last batch to finish
-    next_tweet_batch = []
-
-    print('Gathering tweets from twitter\n')
-
     # Make call to twitter's streaming API to gather tweets
-    try:
-        auth = OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
-        auth.set_access_token(secrets.access_token, secrets.access_token_secret)
-        twitter_stream = tweepy.Stream(auth, SListener())
-        twitter_stream.filter(follow=USERS)
-        # FILTER OUT RETWEETS
-    except:
-        print ("Authentication error")
-        twitter_stream.disconnect()
+    while True:
+        print('Gathering tweets from twitter\n')
+        try:
+            try:
+                auth = OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
+                auth.set_access_token(secrets.access_token, secrets.access_token_secret)
+                twitter_stream = tweepy.Stream(auth, SListener())
+                twitter_stream.filter(follow=USERS)
+            except:
+                print("Authentication error")
+                twitter_stream.disconnect()
 
-    # while True:
-    #     print('Gathering tweets from twitter\n')
-    #     # TODO make a call to twitter's streaming or RESTful API to gather tweets
-    #     auth = OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
-    #     auth.set_access_token(secrets.access_token, secrets.access_token_secret)
-    #     twitter_stream = Stream(auth, StreamListener())
-    #     twitter_stream.filter(track="united")
+            # Writes the processing input file
+            generate_input_file()
 
+            # Starts the background process
+            background_process = Popen(["python", "process.py", INPUT_FILE], stdout=PIPE)
 
-        # # Starts the background process
-        # background_process = Popen(["python", "process.py", INPUT_FILE], stdout=PIPE)
-        # background_trade = Popen(["python", "trade.py"], stdout=PIPE)
-        #
-        # # Polls the engines for their status
-        # while True:
-        #     # Deals with the SA processing engine
-        #     if background_process.poll() is None:
-        #         print("[SA engine]\t\tStatus: Currently processing a batch.")
-        #     else:
-        #         print("[SA engine]\t\tStatus: Done processing a batch, loading next tweet batch in.")
-        #         # TODO make a new background process
-        #         break
-        #
-        #     # Deals with the trading engine
-        #     if background_trade.poll() is None:
-        #         print("[Trading engine]\tStatus: Currently processing a batch.")
-        #     else:
-        #         print("[Trading engine]\tStatus: Done processing a batch. Checking for different SA output")
-        #         # TODO make a new background trade if SA is not different
-        #         break
-        #
-        #     # Signal handling
-        #     signal.signal(signal.SIGALRM, handler)
-        #     signal.alarm(POLLING_TIMEOUT)
-        #
-        #     try:
-        #         time.sleep(3)
-        #     except KeyboardInterrupt:
-        #         print("\nCleaning up and exiting ingestion engine")
-        #         if os.path.isfile(INPUT_FILE):
-        #             os.remove(INPUT_FILE)
-        #         exit(0)
-        #     except ValueError:
-        #         print("\nChecking if backend is free for the next batch")
+            while background_process.poll() is None:
+                print("[SA engine]\t\tStatus: Currently processing a batch.")
 
-        # At this point, the last batch is complete
-        # print("The last batch is now complete, processing next batch.")
-        # print("--------------------")
+                # Signal handling
+                signal.signal(signal.SIGALRM, handler)
+                signal.alarm(POLLING_TIMEOUT)
+
+                try:
+                    auth = OAuthHandler(secrets.consumer_key, secrets.consumer_secret)
+                    auth.set_access_token(secrets.access_token, secrets.access_token_secret)
+                    twitter_stream = tweepy.Stream(auth, SListener())
+                    twitter_stream.filter(follow=USERS)
+                except ValueError:
+                    print("Checking if backend if free for the next batch")
+                except:
+                    print("Authentication error")
+                    twitter_stream.disconnect()
+
+            # At this point, the last batch is complete
+            print("The last batch is now complete, processing next batch.")
+            print("--------------------")
+        except KeyboardInterrupt:
+            print("\nCleaning up and exiting the ingestion engine")
+            if os.path.isfile(INPUT_FILE):
+                os.remove(INPUT_FILE)
+            break
 
 
 if __name__ == '__main__':
