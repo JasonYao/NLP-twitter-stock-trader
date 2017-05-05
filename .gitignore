@@ -99,3 +99,4 @@ ENV/
 .app.history
 .input
 .app.trades
+secrets.py
