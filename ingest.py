@@ -76,7 +76,9 @@ class SListener(StreamListener):
             print(status.text)
             print(status.created_at)
             print(len(NEXT_TWEET_BATCH))
-            new_tweet = Tweet(status.text.strip('\n'), status.retweet_count, status.favorite_count, status.created_at)
+            status.text = status.text.replace('\n', '')
+            status.text = status.text.replace('|', '')
+            new_tweet = Tweet(status.text, status.retweet_count, status.favorite_count, status.created_at)
             NEXT_TWEET_BATCH.append(new_tweet)
             return True
         else:
